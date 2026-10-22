@@ -1,0 +1,46 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Repository'yi Kopyala
+      uses: actions/checkout@v3
+
+    - name: Node.js Ortamını Kur
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Java (JDK 17) Ortamını Kur
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Bağımlılıkları Yükle ve Android Platformunu Ekle
+      run: |
+        npm install
+        npx cap add android
+
+    - name: Web Varlıklarını Senkronize Et
+      run: |
+        npx cap sync android
+
+    - name: Android Projesini Derle (Debug APK)
+      run: |
+        cd android
+        chmod +x gradlew
+        ./gradlew assembleDebug
+
+    - name: Üretilen APK Dosyasını Kaydet (Artifacts)
+      uses: actions/upload-artifact@v4
+      with:
+        name: NotDefterim-Debug-APK
+        path: android/app/build/outputs/apk/debug/app-debug.apk
