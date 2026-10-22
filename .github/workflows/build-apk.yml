@@ -24,8 +24,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Bağımlılıkları Yükle ve Android Platformunu Ekle
+    - name: Web Klasörünü Hazırla ve Bağımlılıkları Yükle
       run: |
+        mkdir -p www
+        cp index.html www/
         npm install
         npx cap add android
 
