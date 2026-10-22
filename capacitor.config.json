@@ -1,0 +1,6 @@
+{
+  "appId": "com.notdefterim.app",
+  "appName": "Not Defterim",
+  "webDir": ".",
+  "bundledWebRuntime": false
+}
