@@ -1,6 +1,6 @@
 {
   "appId": "com.notdefterim.app",
   "appName": "Not Defterim",
-  "webDir": ".",
+  "webDir": "www",
   "bundledWebRuntime": false
 }
